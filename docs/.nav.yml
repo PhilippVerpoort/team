@@ -1,0 +1,11 @@
+append_unmatched: false
+use_page_title: true
+
+nav:
+- Home: index.md
+- User Guide:
+    - Overview: guide/overview.md
+- Examples:
+    - examples/index.md
+    - "examples/*.ipynb"
+- API Reference: api/index.md

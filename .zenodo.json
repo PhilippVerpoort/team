@@ -1,0 +1,18 @@
+{
+  "title": "TEAM: Techno-economic assessment and manipulation framework",
+  "version": "0.1.0",
+  "creators": [
+    {
+      "name": "Verpoort, Philipp C.",
+      "affiliation": "Potsdam Institute for Climate Impact Research",
+      "orcid": "0000-0003-1319-5006"
+    }
+  ],
+  "keywords": ["techno-economic assessment", "database", "technologies", "energy", "climate"],
+  "license": {
+    "id": "MIT",
+    "title": "MIT Licence",
+    "url": "http://www.opensource.org/licenses/MIT"
+  },
+  "publication_date": "2026-05-03"
+}
