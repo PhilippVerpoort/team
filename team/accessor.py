@@ -211,36 +211,67 @@ class TEAMAccessor:
                 if field not in df.columns:
                     df = df.assign(**{field: np.nan})
 
-        if field_values is None:
-            field_values = df[fields].dropna(how="any").drop_duplicates()
-        else:
-            if not field_values.columns.equals(df[fields].columns):
-                raise Exception(f"Field values must contain field columns. "
-                                f"Looking for `{','.join(fields)}` but found "
-                                f"`{','.join(field_values.columns.tolist())}`")
+        if field_values is not None:
+            if not set(fields).issubset(field_values.columns):
+                raise Exception(
+                    f"field_values must contain all field columns. "
+                    f"Looking for `{','.join(fields)}` but found "
+                    f"`{','.join(field_values.columns.tolist())}`"
+                )
+            # Only keep the relevant columns
+            field_values = field_values[fields]
             if field_values.duplicated().any():
-                raise Exception("Field values may not contain duplicates: \n"
+                raise Exception("field_values may not contain duplicates:\n"
                                 + str(field_values))
             if field_values.isnull().any().any():
-                raise Exception("Field values may not contain NaNs: \n"
+                raise Exception("field_values may not contain NaNs:\n"
                                 + str(field_values))
 
-        for field in fields:
-            explodable = pd.Series(
-                index=df.index,
-                data=len(df) * [field_values[field].unique().tolist()],
-            )
-            df = df.assign(**{field: df[field].fillna(explodable)})
+        # Explode field values, grouped by NaN pattern to preserve
+        # observed joint combinations (not cartesian products).
+        nan_mask = df[fields].isna()
+        patterns = nan_mask.apply(tuple, axis=1)
 
-        # Explode field values.
-        df = df.explode(fields)
+        parts = []
+        for pattern, group in df.groupby(patterns, sort=False):
+            nan_cols = [f for f, is_nan in zip(fields, pattern) if
+                        is_nan]
 
-        # Keep only known combinations if requested.
-        if not combine_full:
-            df = df.merge(field_values, how="inner")
+            if not nan_cols:
+                parts.append(group)
+                continue
 
-        # Return.
-        return df.reset_index(drop=True)
+            # Derive combos: either project manual field_values or
+            # pull from df rows where these specific columns are non-NaN.
+            if field_values is not None:
+                combos = (
+                    field_values[nan_cols]
+                    .drop_duplicates()
+                    .reset_index(drop=True)
+                )
+            else:
+                mask = df[nan_cols].notna().all(axis=1)
+                combos = (
+                    df.loc[mask, nan_cols]
+                    .drop_duplicates()
+                    .reset_index(drop=True)
+                )
+
+            if combos.empty:
+                parts.append(group)
+                continue
+
+            base = group.drop(columns=nan_cols).reset_index(drop=True)
+            base["_k"] = 1
+            combos["_k"] = 1
+            merged = base.merge(combos, on="_k").drop(columns="_k")
+            parts.append(merged[df.columns])
+
+        return (
+            pd.concat(parts, ignore_index=True)
+            .drop_duplicates()
+            .reset_index(drop=True)
+        )
 
     def groupby_fields(
         self,
@@ -475,7 +506,11 @@ class TEAMAccessor:
         elif not isinstance(var_cols, list):
             var_cols = [var_cols]
 
-        # Combine dataframe `using` with the one associated with this object.
+        # The old rows are the original dataframe.
+        df_old = self._df
+
+        # Depending on the arguments, we may combine this with `using` to
+        # a new dataframe called df_old_full.
         if using is not None:
             if (
                 isinstance(using, list | tuple)
@@ -487,73 +522,36 @@ class TEAMAccessor:
                     "Argument `using` must be dataframe or list of dataframes."
                 )
 
-            df_combined = pd.concat([self._df, using])
-
-            fields = df_combined.team.fields(
-                var_cols=var_cols,
-                unit_col=unit_col,
-                value_col=value_col,
-            )
-
-            if fields:
-                field_values = (
-                    df_combined[fields]
-                    .dropna(how="any")
-                    .drop_duplicates()
-                )
-
-                using = using.team.explode(
-                    fields=fields,
-                    field_values=field_values,
-                )
-
-                df = self.explode(
-                    fields=fields,
-                    field_values=field_values,
-                )
-            else:
-                df = self._df
-
-            df_full = pd.concat([df, using], ignore_index=True)
+            df_old_full = pd.concat([df_old, using])
         else:
-            fields = self.fields(
-                var_cols=var_cols,
-                unit_col=unit_col,
-                value_col=value_col,
-            )
+            df_old_full = df_old
 
-            if fields:
-                df_full = self.explode(
-                    fields=fields,
-                )
-            else:
-                df_full = self._df
+        # Explode.
+        fields = df_old_full.team.fields(
+            var_cols=var_cols,
+            unit_col=unit_col,
+            value_col=value_col,
+        )
+        df_old_full = df_old_full.team.explode(fields=fields)
 
-        # Create dummy field if non exists.
+        # Create dummy field if none exists.
         if not fields:
             fields = ["unfielded"]
-            df_full = df_full.assign(unfielded=0)
-            if using is not None:
-                using = using.assign(unfielded=0)
-
+            df_old_full = df_old_full.assign(unfielded=0)
 
         # Group by all fields, by variable columns, and by unit. Verify
-        # integrity to ensure that there are now duplicates.
-        df_grouped = (
-            df_full
+        # integrity to ensure that there are no duplicates.
+        df_old_full = (
+            df_old_full
             .set_index(fields + var_cols + [unit_col], verify_integrity=True)
-            [value_col]
         )
 
         # Pivot dataframe and set pint units.
-        df_pivot = (
-            df_grouped
-            .unstack(var_cols + [unit_col])
-        )
+        df_pivot = df_old_full[value_col].unstack(var_cols + [unit_col])
 
         # Get a presence matrix.
         presence = (
-            pd.Series(True, index=df_grouped.index)
+            pd.Series(True, index=df_old_full.index)
             .unstack(var_cols + [unit_col], fill_value=False)
         )
 
@@ -687,51 +685,72 @@ class TEAMAccessor:
         # Check whether return list is empty.
         if not return_list:
             if only_new:
-                return pd.DataFrame(columns=self._df.columns)
+                return pd.DataFrame(columns=df_old.columns)
             else:
-                return self._df
+                return df_old
 
         # Combine groups into single dataframe.
-        ret = pd.concat(return_list)
+        df_new = pd.concat(return_list)
 
         # Convert pint objects to unit string and float value if any.
-        if ret[value_col].dtype == "object":
-            ret = ret.reset_index(level=unit_col)
-            locs = ret[value_col].apply(lambda x: isinstance(x, Quantity))
-            ret.loc[locs, [unit_col, value_col]] = ret.loc[
+        if df_new[value_col].dtype == "object":
+            df_new = df_new.reset_index(level=unit_col)
+            locs = df_new[value_col].apply(lambda x: isinstance(x, Quantity))
+            df_new.loc[locs, [unit_col, value_col]] = df_new.loc[
                 locs, value_col
             ].apply(lambda x: pd.Series({unit_col: x.u, value_col: x.m}))
-            ret = ret.set_index(unit_col, append=True)
+            df_new = df_new.set_index(unit_col, append=True)
 
         # Drop rows with nan entries in unit or value columns.
         if dropna:
-            ret.dropna(subset=value_col, inplace=True)
+            df_new.dropna(subset=value_col, inplace=True)
 
-        # Drop rows in original dataframe or in using.
-        if only_new:
-            ret = ret.loc[~ret.index.isin(df_grouped.index)]
-        else:
-            if using is not None:
-                using_idx = using.set_index(fields + var_cols + [unit_col]).index
-                ret = ret.loc[~ret.index.isin(using_idx)]
+        # Drop rows that are already in old.
+        common_idx = df_new.index.intersection(df_old_full.index)
+        same = (df_new.loc[common_idx] == df_old_full.loc[common_idx]).all(axis=1)
+        df_new = df_new.drop(common_idx[same])
 
         # Raise exception if index has duplicates after the above.
-        if not ret.index.is_unique:
-            duplicate_labels = ret.loc[ret.index.duplicated(), fields + var_cols]
+        if not df_new.index.is_unique:
+            duplicate_labels = df_new.loc[df_new.index.duplicated(), fields + var_cols]
             warnings.warn(
                 f"Internal error: variables should only exist "
                 f"once per case: {duplicate_labels}"
             )
 
         # Drop column called 'unfielded' if it exists.
-        if "unfielded" in ret.index.names:
-            ret = ret.droplevel("unfielded")
+        if "unfielded" in df_new.index.names:
+            df_new = df_new.droplevel("unfielded")
+
+        # Combine with old if requested.
+        if only_new:
+            ret = df_new
+        else:
+            df_old_extended_index = (
+                df_old
+                .set_index([
+                    c
+                    for c in df_new.index.names
+                    if c in df_old.columns
+                ])
+            )
+            for level in df_new.index.names:
+                if level not in df_old_extended_index.index.names:
+                    df_old_extended_index = df_old_extended_index.set_index(
+                        pd.Index(
+                            [np.nan] * len(df_old_extended_index),
+                            name=level,
+                        ),
+                        append=True,
+                    )
+            ret = (
+                df_new
+                .reset_index(level=unit_col)
+                .combine_first(df_old_extended_index.reset_index(level=unit_col))
+            )
 
         # Return.
-        if only_new:
-            return ret.reset_index()
-        else:
-            return pd.concat([self._df, ret.reset_index()], ignore_index=True)
+        return ret.reset_index()
 
     def calculate(
         self,
