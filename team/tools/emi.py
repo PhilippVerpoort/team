@@ -64,13 +64,13 @@ def calc_GHGI(
     # Define return dict.
     ret = {}
 
-    # Get Emissions.
+    # Find entries containing GHG Emissions.
     for emi in data:
         m = match(r"^GHG Emissions\|(.*)", emi)
         if m:
             ret[m.group(1)] = data[emi]
 
-    # Define prefix.
+    # Add name to prefix.
     prefix = "GHGI|"
     if name is not None:
         prefix += str(name) + "|"

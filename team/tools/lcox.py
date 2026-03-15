@@ -126,15 +126,11 @@ def calc_LCOX(
 
     # Add Costs from CO2 pricing if provided.
     if ghg_price is not None:
+        # Find entries containing GHG Emissions.
         for emi in data:
-            # Loop only over GHG Emissions.
-            if not match(r"^GHG Emission\|.*", emi):
-                continue
-            # Split emissions type (CO2, CH4, N2O, etc) off from variable name.
-            emi_type = emi.split("|", 2)[1]
-            # Combine emi type into new name.
-            emi_name = f"GHG Pricing|{emi_type}"
-            ret[emi_name] = ghg_price * data[emi]
+            m = match(r"^GHG Emissions\|(.*)", emi)
+            if m:
+                ret[f"GHG Pricing|{m.group(1)}"] = ghg_price * data[emi]
 
     # Add name to prefix.
     prefix = "LCOX|"
