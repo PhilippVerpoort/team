@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="1023.9999"
+   viewBox="0 0 278.29665 278.29662"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1" />
+  <path
+     id="rect5"
+     style="fill:#ffffff;stroke-width:0.513588;stroke-dashoffset:22.6771"
+     d="M 27.177402,268.02485 V 99.143623 C 27.177402,93.453063 31.758613,88.871853 37.449177,88.871853 H 67.225646 V 278.29663 H 37.449177 C 31.758613,278.29663 27.177402,273.71542 27.177402,268.02485 Z" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke-width:0.513588;stroke-dashoffset:22.6771"
+     id="rect6"
+     width="278.29663"
+     height="40.048244"
+     x="-278.29663"
+     y="86.739502"
+     transform="rotate(-90)" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke-width:0.513589;stroke-dashoffset:22.6771"
+     id="rect7"
+     width="230.84532"
+     height="40.048244"
+     x="-278.29663"
+     y="146.30157"
+     transform="rotate(-90)" />
+  <path
+     id="rect10"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:0.513588;stroke-dashoffset:22.6771"
+     d="M 211.071,170.40408 H 240.84747 C 246.53803,170.40408 251.11924,174.98529 251.11924,180.67585 V 268.02485 C 251.11924,273.71542 246.53803,278.29663 240.84747,278.29663 H 211.071 Z" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:217.419px;line-height:1;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:#686c70;fill-opacity:1;stroke-width:0.513588;stroke-dashoffset:22.6771"
+     x="413.79968"
+     y="598.17987"
+     id="text2"><tspan
+       id="tspan2"
+       style="stroke-width:0.513589"
+       x="413.79968"
+       y="598.17987" /></text>
+</svg>
