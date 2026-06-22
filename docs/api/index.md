@@ -4,4 +4,6 @@ title: API Reference
 
 # API Reference
 
-::: team
+::: team._accessor
+
+::: team.tools
