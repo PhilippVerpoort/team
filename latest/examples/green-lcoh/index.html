@@ -1512,436 +1512,824 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ab971196">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=11814c43">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="calculating-lcoh">Calculating LCOH<a class="anchor-link" href="#calculating-lcoh">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3c2a27aa">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0cefb716">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Here we calculate the Levelised Cost of Hydrogen (LCOH) for electrolytic hydrogen.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c74bc66">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d724781">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="prepare-notebook">Prepare notebook.<a class="anchor-link" href="#prepare-notebook">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=7c6806c5">
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0e693697">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=91b1ffdc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s2">"plotly"</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cet_units</span><span class="w"> </span><span class="kn">import</span> <span class="n">Q</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">posted</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEDF</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">team.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">calc_LCOX</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-1">import numpy as np
+import pandas as pd
+import plotly
+
+pd.options.plotting.backend = "plotly"
+
+from cet_units import Q
+from posted import TEDF
+from team.tools import calc_LCOX</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1f33394f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="obtain-data">Obtain data<a class="anchor-link" href="#obtain-data">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=37368d6c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b0518982">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">tech_ely</span> <span class="o">=</span> <span class="n">TEDF</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"Tech|Electrolysis"</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
+    <span class="n">subtech</span><span class="o">=</span><span class="p">[</span><span class="s2">"AEL"</span><span class="p">,</span> <span class="s2">"PEM"</span><span class="p">],</span>
+    <span class="n">size</span><span class="o">=</span><span class="s2">"100 MW"</span><span class="p">,</span>
+    <span class="n">append_references</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">agg</span><span class="o">=</span><span class="p">[</span><span class="s2">"source"</span><span class="p">,</span> <span class="s2">"subtech"</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tech_ely</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-2">tech_ely = TEDF.load("Tech|Electrolysis").aggregate(
+    subtech=["AEL", "PEM"],
+    size="100 MW",
+    append_references=True,
+    agg=["source", "subtech"],
+)
+display(tech_ely)</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>variable</th>
-<th>value</th>
-<th>unit</th>
-</tr>
-</thead>
+<!--| quarto-html-table-processing: none -->
+<table id="itables_e02137f2_8f39_49a7_b203_f8f9ee92e162">
 <tbody>
 <tr>
-<th>0</th>
-<td>CAPEX</td>
-<td>681.732210</td>
-<td>EUR_2024</td>
-</tr>
-<tr>
-<th>1</th>
-<td>Input Capacity|Electricity</td>
-<td>1.000000</td>
-<td>kW</td>
-</tr>
-<tr>
-<th>2</th>
-<td>Input|Electricity</td>
-<td>1.000000</td>
-<td>kWh</td>
-</tr>
-<tr>
-<th>3</th>
-<td>Input|Water</td>
-<td>0.178894</td>
-<td>kg_H2O</td>
-</tr>
-<tr>
-<th>4</th>
-<td>OPEX Fixed</td>
-<td>19.736287</td>
-<td>EUR_2024/year</td>
-</tr>
-<tr>
-<th>5</th>
-<td>Output|Hydrogen</td>
-<td>0.019627</td>
-<td>kg_H2</td>
-</tr>
-<tr>
-<th>6</th>
-<td>Total Input Capacity|Electricity</td>
-<td>52.500000</td>
-<td>MW</td>
+<td style="vertical-align:middle; text-align:left"><a href="https://mwouts.github.io/itables/"><svg class="main-svg" style="font-family: 'Droid Sans', sans-serif;" viewbox="0 0 500 400" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="fill:#d9d7fc">
+<path d="M100,400H500V357H100Z"></path>
+<path d="M100,300H400V257H100Z"></path>
+<path d="M0,200H400V157H0Z"></path>
+<path d="M100,100H500V57H100Z"></path>
+<path d="M100,350H500V307H100Z"></path>
+<path d="M100,250H400V207H100Z"></path>
+<path d="M0,150H400V107H0Z"></path>
+<path d="M100,50H500V7H100Z"></path>
+</g>
+<g style="fill:#1a1366;stroke:#1a1366;">
+<rect height="43" width="400" x="100" y="7">
+<animate attributename="width" dur="5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="5s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<rect height="43" width="400" x="0" y="107">
+<animate attributename="width" dur="3.5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="3.5s" repeatcount="indefinite" values="0;0;400"></animate>
+</rect>
+<rect height="43" width="300" x="100" y="207">
+<animate attributename="width" dur="3s" repeatcount="indefinite" values="0;300;0"></animate>
+<animate attributename="x" dur="3s" repeatcount="indefinite" values="100;100;400"></animate>
+</rect>
+<rect height="43" width="400" x="100" y="307">
+<animate attributename="width" dur="4s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="4s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<g rx="5" style="fill:transparent;stroke-width:8; stroke-linejoin:round">
+<g transform="translate(45 50) rotate(-45)">
+<circle cx="0" cy="0" r="33"></circle>
+<rect height="30" width="16" x="-8" y="32"></rect>
+</g>
+<g transform="translate(450 152)">
+<polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+<rect height="60" width="60" x="-15" y="-40"></rect>
+</g>
+<g transform="translate(50 352)">
+<polygon points="-35,-5 0,-40 35,-5"></polygon>
+<polygon points="-35,10 0,45 35,10"></polygon>
+</g>
+<g transform="translate(75 250)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+<g transform="translate(425 250) rotate(180)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+</g>
+</g>
+</svg>
+</a>
+        Loading ITables v2.8.1 from the internet...
+        (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)
+      </td>
 </tr>
 </tbody>
 </table>
+<link href="https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.css" rel="stylesheet"/>
+<script type="module">
+    import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.js';
+
+    document.querySelectorAll("#itables_e02137f2_8f39_49a7_b203_f8f9ee92e162:not(.dataTable)").forEach(table => {
+        if (!(table instanceof HTMLTableElement))
+            return;
+
+        let dt_args = {
+          "classes": ["display", "nowrap", "compact"],
+          "columnDefs": [{"render": "function (data, type, row, meta) { return type === 'sort' || type === 'type' ? data[1] : data[0]; }", "targets": [1]}],
+          "data_json": "[[\"CAPEX\", [\"681.732210\", 681.7322097233998], \"EUR_2024\"], [\"Input Capacity|Electricity\", [\"1.000000\", 1.0], \"kW\"], [\"Input|Electricity\", [\"1.000000\", 1.0], \"kWh\"], [\"Input|Water\", [\"0.178894\", 0.17889407182923914], \"kg_H2O\"], [\"OPEX Fixed\", [\"19.736287\", 19.736286674631998], \"EUR_2024/year\"], [\"Output|Hydrogen\", [\"0.019627\", 0.01962701957590565], \"kg_H2\"], [\"Total Input Capacity|Electricity\", [\"52.500000\", 52.5], \"MW\"]]",
+          "keys_to_be_evaluated": [["columnDefs", 0, "render"]],
+          "layout": {"bottomEnd": null, "bottomStart": null, "topEnd": null, "topStart": null},
+          "order": [],
+          "style": {"caption-side": "bottom", "margin": "auto", "table-layout": "auto", "width": "auto"},
+          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>variable</th>\n      <th>value</th>\n      <th>unit</th>\n    </tr>\n  </thead></table>",
+          "text_in_header_can_be_selected": true
+        };
+        new ITable(table, dt_args);
+    });
+</script>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=33c59307">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2fd67690">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="choose-assumptions">Choose assumptions<a class="anchor-link" href="#choose-assumptions">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=3609db15">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=72d8a7fd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">assumptions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span><span class="o">.</span><span class="n">from_records</span><span class="p">([</span>
+        <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Price|Water"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EUR_2024/t_H2O"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"OCF"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">50.0</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"percent"</span><span class="p">},</span>
+    <span class="p">]),</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"price_case"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">],</span> <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Price|Electricity"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="p">[</span><span class="mf">30.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">],</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EUR_2024/MWh"</span><span class="p">}),</span>
+<span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">sort_columns</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-3">assumptions = pd.concat([
+    pd.DataFrame().from_records([
+        {"variable": "Price|Water", "value": 10.0, "unit": "EUR_2024/t_H2O"},
+        {"variable": "OCF", "value": 50.0, "unit": "percent"},
+    ]),
+    pd.DataFrame({"price_case": ["low", "high"], "variable": "Price|Electricity", "value": [30.0, 60.0], "unit": "EUR_2024/MWh"}),
+], ignore_index=True).team.sort_columns()
+display(assumptions)</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>price_case</th>
-<th>variable</th>
-<th>unit</th>
-<th>value</th>
-</tr>
-</thead>
+<!--| quarto-html-table-processing: none -->
+<table id="itables_d7abc12c_1750_4c5a_85c0_715835c4750b">
 <tbody>
 <tr>
-<th>0</th>
-<td>NaN</td>
-<td>Price|Water</td>
-<td>EUR_2024/t_H2O</td>
-<td>10.0</td>
-</tr>
-<tr>
-<th>1</th>
-<td>NaN</td>
-<td>OCF</td>
-<td>percent</td>
-<td>50.0</td>
-</tr>
-<tr>
-<th>2</th>
-<td>low</td>
-<td>Price|Electricity</td>
-<td>EUR_2024/MWh</td>
-<td>30.0</td>
-</tr>
-<tr>
-<th>3</th>
-<td>high</td>
-<td>Price|Electricity</td>
-<td>EUR_2024/MWh</td>
-<td>60.0</td>
+<td style="vertical-align:middle; text-align:left"><a href="https://mwouts.github.io/itables/"><svg class="main-svg" style="font-family: 'Droid Sans', sans-serif;" viewbox="0 0 500 400" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="fill:#d9d7fc">
+<path d="M100,400H500V357H100Z"></path>
+<path d="M100,300H400V257H100Z"></path>
+<path d="M0,200H400V157H0Z"></path>
+<path d="M100,100H500V57H100Z"></path>
+<path d="M100,350H500V307H100Z"></path>
+<path d="M100,250H400V207H100Z"></path>
+<path d="M0,150H400V107H0Z"></path>
+<path d="M100,50H500V7H100Z"></path>
+</g>
+<g style="fill:#1a1366;stroke:#1a1366;">
+<rect height="43" width="400" x="100" y="7">
+<animate attributename="width" dur="5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="5s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<rect height="43" width="400" x="0" y="107">
+<animate attributename="width" dur="3.5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="3.5s" repeatcount="indefinite" values="0;0;400"></animate>
+</rect>
+<rect height="43" width="300" x="100" y="207">
+<animate attributename="width" dur="3s" repeatcount="indefinite" values="0;300;0"></animate>
+<animate attributename="x" dur="3s" repeatcount="indefinite" values="100;100;400"></animate>
+</rect>
+<rect height="43" width="400" x="100" y="307">
+<animate attributename="width" dur="4s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="4s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<g rx="5" style="fill:transparent;stroke-width:8; stroke-linejoin:round">
+<g transform="translate(45 50) rotate(-45)">
+<circle cx="0" cy="0" r="33"></circle>
+<rect height="30" width="16" x="-8" y="32"></rect>
+</g>
+<g transform="translate(450 152)">
+<polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+<rect height="60" width="60" x="-15" y="-40"></rect>
+</g>
+<g transform="translate(50 352)">
+<polygon points="-35,-5 0,-40 35,-5"></polygon>
+<polygon points="-35,10 0,45 35,10"></polygon>
+</g>
+<g transform="translate(75 250)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+<g transform="translate(425 250) rotate(180)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+</g>
+</g>
+</svg>
+</a>
+        Loading ITables v2.8.1 from the internet...
+        (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)
+      </td>
 </tr>
 </tbody>
 </table>
+<link href="https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.css" rel="stylesheet"/>
+<script type="module">
+    import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.js';
+
+    document.querySelectorAll("#itables_d7abc12c_1750_4c5a_85c0_715835c4750b:not(.dataTable)").forEach(table => {
+        if (!(table instanceof HTMLTableElement))
+            return;
+
+        let dt_args = {
+          "classes": ["display", "nowrap", "compact"],
+          "columnDefs": [{"render": "function (data, type, row, meta) { return type === 'sort' || type === 'type' ? data[1] : data[0]; }", "targets": [3]}],
+          "data_json": "[[\"NaN\", \"Price|Water\", \"EUR_2024/t_H2O\", [\"10.0\", 10.0]], [\"NaN\", \"OCF\", \"percent\", [\"50.0\", 50.0]], [\"low\", \"Price|Electricity\", \"EUR_2024/MWh\", [\"30.0\", 30.0]], [\"high\", \"Price|Electricity\", \"EUR_2024/MWh\", [\"60.0\", 60.0]]]",
+          "keys_to_be_evaluated": [["columnDefs", 0, "render"]],
+          "layout": {"bottomEnd": null, "bottomStart": null, "topEnd": null, "topStart": null},
+          "order": [],
+          "style": {"caption-side": "bottom", "margin": "auto", "table-layout": "auto", "width": "auto"},
+          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>price_case</th>\n      <th>variable</th>\n      <th>unit</th>\n      <th>value</th>\n    </tr>\n  </thead></table>",
+          "text_in_header_can_be_selected": true
+        };
+        new ITable(table, dt_args);
+    });
+</script>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e94cfa30">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=be3d0b1d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="calculate-lcoh-for-different-electricity-prices">Calculate LCOH for different electricity prices<a class="anchor-link" href="#calculate-lcoh-for-different-electricity-prices">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=1f2541e6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=428b0f1f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">tech_ely</span>
+    <span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">perform</span><span class="p">(</span><span class="n">calc_LCOX</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s2">"Output|Hydrogen"</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span> <span class="n">interest_rate</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">book_lifetime</span><span class="o">=</span><span class="s2">"20 years"</span><span class="p">,</span> <span class="n">only_new</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">unit_to</span><span class="p">(</span><span class="s2">"EUR_2024/MWh_H2_LHV"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"price_case"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">apply</span><span class="p">([</span><span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">"price_case"</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">"value"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"variable"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Electricity price case"</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"LCOH  ( </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> )"</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-4">df = (
+    tech_ely
+    .team.perform(calc_LCOX, reference="Output|Hydrogen", using=assumptions, interest_rate=0.08, book_lifetime="20 years", only_new=True)
+    .team.unit_to("EUR_2024/MWh_H2_LHV")
+    .sort_values(by="price_case", key=lambda col: col.apply(["low", "high"].index))
+)
+display(df)
+
+display(
+    df
+    .plot.bar(
+        x="price_case",
+        y="value",
+        color="variable",
+    )
+    .update_layout(
+        xaxis_title="Electricity price case",
+        yaxis_title=f"LCOH  ( {df.unit.iloc[0]} )",
+    )
+)</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>price_case</th>
-<th>variable</th>
-<th>unit</th>
-<th>value</th>
-</tr>
-</thead>
+<!--| quarto-html-table-processing: none -->
+<table id="itables_ae190dcf_97e7_4323_9501_410c418f9bbe">
 <tbody>
 <tr>
-<th>1</th>
-<td>low</td>
-<td>LCOX|Capital</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>24.231319</td>
-</tr>
-<tr>
-<th>3</th>
-<td>low</td>
-<td>LCOX|OM Fixed</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>6.887446</td>
-</tr>
-<tr>
-<th>7</th>
-<td>low</td>
-<td>LCOX|Input Cost|Water</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>2.734405</td>
-</tr>
-<tr>
-<th>5</th>
-<td>low</td>
-<td>LCOX|Input Cost|Electricity</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>45.855154</td>
-</tr>
-<tr>
-<th>2</th>
-<td>high</td>
-<td>LCOX|OM Fixed</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>6.887446</td>
-</tr>
-<tr>
-<th>0</th>
-<td>high</td>
-<td>LCOX|Capital</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>24.231319</td>
-</tr>
-<tr>
-<th>4</th>
-<td>high</td>
-<td>LCOX|Input Cost|Electricity</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>91.710307</td>
-</tr>
-<tr>
-<th>6</th>
-<td>high</td>
-<td>LCOX|Input Cost|Water</td>
-<td>EUR_2024/MWh_H2_LHV</td>
-<td>2.734405</td>
+<td style="vertical-align:middle; text-align:left"><a href="https://mwouts.github.io/itables/"><svg class="main-svg" style="font-family: 'Droid Sans', sans-serif;" viewbox="0 0 500 400" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="fill:#d9d7fc">
+<path d="M100,400H500V357H100Z"></path>
+<path d="M100,300H400V257H100Z"></path>
+<path d="M0,200H400V157H0Z"></path>
+<path d="M100,100H500V57H100Z"></path>
+<path d="M100,350H500V307H100Z"></path>
+<path d="M100,250H400V207H100Z"></path>
+<path d="M0,150H400V107H0Z"></path>
+<path d="M100,50H500V7H100Z"></path>
+</g>
+<g style="fill:#1a1366;stroke:#1a1366;">
+<rect height="43" width="400" x="100" y="7">
+<animate attributename="width" dur="5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="5s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<rect height="43" width="400" x="0" y="107">
+<animate attributename="width" dur="3.5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="3.5s" repeatcount="indefinite" values="0;0;400"></animate>
+</rect>
+<rect height="43" width="300" x="100" y="207">
+<animate attributename="width" dur="3s" repeatcount="indefinite" values="0;300;0"></animate>
+<animate attributename="x" dur="3s" repeatcount="indefinite" values="100;100;400"></animate>
+</rect>
+<rect height="43" width="400" x="100" y="307">
+<animate attributename="width" dur="4s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="4s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<g rx="5" style="fill:transparent;stroke-width:8; stroke-linejoin:round">
+<g transform="translate(45 50) rotate(-45)">
+<circle cx="0" cy="0" r="33"></circle>
+<rect height="30" width="16" x="-8" y="32"></rect>
+</g>
+<g transform="translate(450 152)">
+<polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+<rect height="60" width="60" x="-15" y="-40"></rect>
+</g>
+<g transform="translate(50 352)">
+<polygon points="-35,-5 0,-40 35,-5"></polygon>
+<polygon points="-35,10 0,45 35,10"></polygon>
+</g>
+<g transform="translate(75 250)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+<g transform="translate(425 250) rotate(180)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+</g>
+</g>
+</svg>
+</a>
+        Loading ITables v2.8.1 from the internet...
+        (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)
+      </td>
 </tr>
 </tbody>
 </table>
-</div>
+<link href="https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.css" rel="stylesheet"/>
+<script type="module">
+    import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.js';
+
+    document.querySelectorAll("#itables_ae190dcf_97e7_4323_9501_410c418f9bbe:not(.dataTable)").forEach(table => {
+        if (!(table instanceof HTMLTableElement))
+            return;
+
+        let dt_args = {
+          "classes": ["display", "nowrap", "compact"],
+          "columnDefs": [{"render": "function (data, type, row, meta) { return type === 'sort' || type === 'type' ? data[1] : data[0]; }", "targets": [4]}],
+          "data_json": "[[1, \"low\", \"LCOX|Capital\", \"EUR_2024/MWh_H2_LHV\", [\"24.231319\", 24.231318937608897]], [3, \"low\", \"LCOX|OM Fixed\", \"EUR_2024/MWh_H2_LHV\", [\"6.887446\", 6.887446420168963]], [7, \"low\", \"LCOX|Input Cost|Water\", \"EUR_2024/MWh_H2_LHV\", [\"2.734405\", 2.7344050552971093]], [5, \"low\", \"LCOX|Input Cost|Electricity\", \"EUR_2024/MWh_H2_LHV\", [\"45.855154\", 45.855153734337236]], [2, \"high\", \"LCOX|OM Fixed\", \"EUR_2024/MWh_H2_LHV\", [\"6.887446\", 6.887446420168963]], [0, \"high\", \"LCOX|Capital\", \"EUR_2024/MWh_H2_LHV\", [\"24.231319\", 24.231318937608897]], [4, \"high\", \"LCOX|Input Cost|Electricity\", \"EUR_2024/MWh_H2_LHV\", [\"91.710307\", 91.71030746867447]], [6, \"high\", \"LCOX|Input Cost|Water\", \"EUR_2024/MWh_H2_LHV\", [\"2.734405\", 2.7344050552971093]]]",
+          "keys_to_be_evaluated": [["columnDefs", 0, "render"]],
+          "layout": {"bottomEnd": null, "bottomStart": null, "topEnd": null, "topStart": null},
+          "order": [],
+          "style": {"caption-side": "bottom", "margin": "auto", "table-layout": "auto", "width": "auto"},
+          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>price_case</th>\n      <th>variable</th>\n      <th>unit</th>\n      <th>value</th>\n    </tr>\n  </thead></table>",
+          "text_in_header_can_be_selected": true
+        };
+        new ITable(table, dt_args);
+    });
+</script>
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<script>
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        </script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div style="height:525px; width:100%;"> <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script> <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+<script charset="utf-8" crossorigin="anonymous" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" src="https://cdn.plot.ly/plotly-3.6.0.min.js"></script> <div class="plotly-graph-div" id="01b3da6c-d0f7-4122-b598-5a6edbde0eb0" style="height:100%; width:100%;"></div> <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("01b3da6c-d0f7-4122-b598-5a6edbde0eb0")) {                    Plotly.newPlot(                        "01b3da6c-d0f7-4122-b598-5a6edbde0eb0",                        [{"hovertemplate":"variable=LCOX|Capital\u003cbr\u003eprice_case=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"LCOX|Capital","marker":{"color":"#1F77B4","pattern":{"shape":""}},"name":"LCOX|Capital","orientation":"v","showlegend":true,"textposition":"auto","x":["low","high"],"xaxis":"x","y":{"dtype":"f8","bdata":"xvnHtzc7OEDG+ce3Nzs4QA=="},"yaxis":"y","type":"bar"},{"hovertemplate":"variable=LCOX|OM Fixed\u003cbr\u003eprice_case=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"LCOX|OM Fixed","marker":{"color":"#FF7F0E","pattern":{"shape":""}},"name":"LCOX|OM Fixed","orientation":"v","showlegend":true,"textposition":"auto","x":["low","high"],"xaxis":"x","y":{"dtype":"f8","bdata":"2E8ewb6MG0DYTx7BvowbQA=="},"yaxis":"y","type":"bar"},{"hovertemplate":"variable=LCOX|Input Cost|Water\u003cbr\u003eprice_case=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"LCOX|Input Cost|Water","marker":{"color":"#2CA02C","pattern":{"shape":""}},"name":"LCOX|Input Cost|Water","orientation":"v","showlegend":true,"textposition":"auto","x":["low","high"],"xaxis":"x","y":{"dtype":"f8","bdata":"LyX0wQ\u002fgBUAvJfTBD+AFQA=="},"yaxis":"y","type":"bar"},{"hovertemplate":"variable=LCOX|Input Cost|Electricity\u003cbr\u003eprice_case=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"LCOX|Input Cost|Electricity","marker":{"color":"#D62728","pattern":{"shape":""}},"name":"LCOX|Input Cost|Electricity","orientation":"v","showlegend":true,"textposition":"auto","x":["low","high"],"xaxis":"x","y":{"dtype":"f8","bdata":"7gN1rXXtRkDuA3Wtde1WQA=="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"rgb(36,36,36)"},"error_y":{"color":"rgb(36,36,36)"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"rgb(36,36,36)","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"rgb(36,36,36)"},"baxis":{"endlinecolor":"rgb(36,36,36)","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"rgb(36,36,36)"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"histogram2d"}],"histogram":[{"marker":{"line":{"color":"white","width":0.6}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"rgb(237,237,237)"},"line":{"color":"white"}},"header":{"fill":{"color":"rgb(217,217,217)"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"colorscale":{"diverging":[[0.0,"rgb(103,0,31)"],[0.1,"rgb(178,24,43)"],[0.2,"rgb(214,96,77)"],[0.3,"rgb(244,165,130)"],[0.4,"rgb(253,219,199)"],[0.5,"rgb(247,247,247)"],[0.6,"rgb(209,229,240)"],[0.7,"rgb(146,197,222)"],[0.8,"rgb(67,147,195)"],[0.9,"rgb(33,102,172)"],[1.0,"rgb(5,48,97)"]],"sequential":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"sequentialminus":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]]},"colorway":["#1F77B4","#FF7F0E","#2CA02C","#D62728","#9467BD","#8C564B","#E377C2","#7F7F7F","#BCBD22","#17BECF"],"dragmode":false,"font":{"color":"rgb(36,36,36)"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","polar":{"angularaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"bgcolor":"white","radialaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"yaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"zaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"}},"shapedefaults":{"fillcolor":"black","line":{"width":0},"opacity":0.3},"ternary":{"aaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"baxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"bgcolor":"white","caxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"}},"title":{"x":0.05},"xaxis":{"automargin":true,"fixedrange":true,"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside","title":{"standoff":15},"zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"yaxis":{"automargin":true,"fixedrange":true,"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside","title":{"standoff":15},"zeroline":false,"zerolinecolor":"rgb(36,36,36)"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Electricity price case"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"LCOH  ( EUR_2024\u002fMWh_H2_LHV )"}},"legend":{"title":{"text":"variable"},"tracegroupgap":0},"margin":{"t":60},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('01b3da6c-d0f7-4122-b598-5a6edbde0eb0');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script> </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a749eb58">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f4ba64c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="calculate-lcoh-for-different-capacity-factors">Calculate LCOH for different capacity factors<a class="anchor-link" href="#calculate-lcoh-for-different-capacity-factors">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=cfd5c67f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8db4a853">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=1f448487">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">assumptions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span><span class="o">.</span><span class="n">from_records</span><span class="p">([</span>
+        <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Price|Electricity"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">50.0</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EUR_2024/MWh"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Price|Water"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EUR_2024/t_H2O"</span><span class="p">},</span>
+    <span class="p">]),</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"ocf"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span> <span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"OCF"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"percent"</span><span class="p">}),</span>
+<span class="p">])</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-5">assumptions = pd.concat([
+    pd.DataFrame().from_records([
+        {"variable": "Price|Electricity", "value": 50.0, "unit": "EUR_2024/MWh"},
+        {"variable": "Price|Water", "value": 10.0, "unit": "EUR_2024/t_H2O"},
+    ]),
+    pd.DataFrame({"ocf": pd.Series(range(10, 100)), "variable": "OCF", "value": np.arange(10.0, 100.0), "unit": "percent"}),
+])</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7896a9d1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">tech_ely</span>
+    <span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">perform</span><span class="p">(</span><span class="n">calc_LCOX</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s2">"Output|Hydrogen"</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span> <span class="n">interest_rate</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">book_lifetime</span><span class="o">=</span><span class="s2">"20 years"</span><span class="p">,</span> <span class="n">only_new</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">unit_to</span><span class="p">(</span><span class="s2">"EUR_2024/kg_H2"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">team</span><span class="o">.</span><span class="n">sum_over</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">"ocf"</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">"value"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Operational Capacity Factor  (%)"</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"LCOH  ( </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> )"</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-6">df = (
+    tech_ely
+    .team.perform(calc_LCOX, reference="Output|Hydrogen", using=assumptions, interest_rate=0.08, book_lifetime="20 years", only_new=True)
+    .team.unit_to("EUR_2024/kg_H2")
+    .team.sum_over("variable")
+)
+display(df)
+
+display(
+    df
+    .plot.line(
+        x="ocf",
+        y="value",
+    )
+    .update_layout(
+        xaxis_title="Operational Capacity Factor  (%)",
+        yaxis_title=f"LCOH  ( {df.unit.iloc[0]} )",
+    )
+)</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>ocf</th>
-<th>value</th>
-<th>unit</th>
-</tr>
-</thead>
+<!--| quarto-html-table-processing: none -->
+<table id="itables_294993af_32db_4527_8979_e1d6f03e067a">
 <tbody>
 <tr>
-<th>0</th>
-<td>10.0</td>
-<td>7.825116</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>1</th>
-<td>11.0</td>
-<td>7.353620</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>2</th>
-<td>12.0</td>
-<td>6.960706</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>3</th>
-<td>13.0</td>
-<td>6.628241</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>4</th>
-<td>14.0</td>
-<td>6.343270</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>...</th>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<th>85</th>
-<td>95.0</td>
-<td>3.184599</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>86</th>
-<td>96.0</td>
-<td>3.178912</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>87</th>
-<td>97.0</td>
-<td>3.173342</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>88</th>
-<td>98.0</td>
-<td>3.167886</td>
-<td>EUR_2024/kg_H2</td>
-</tr>
-<tr>
-<th>89</th>
-<td>99.0</td>
-<td>3.162540</td>
-<td>EUR_2024/kg_H2</td>
+<td style="vertical-align:middle; text-align:left"><a href="https://mwouts.github.io/itables/"><svg class="main-svg" style="font-family: 'Droid Sans', sans-serif;" viewbox="0 0 500 400" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="fill:#d9d7fc">
+<path d="M100,400H500V357H100Z"></path>
+<path d="M100,300H400V257H100Z"></path>
+<path d="M0,200H400V157H0Z"></path>
+<path d="M100,100H500V57H100Z"></path>
+<path d="M100,350H500V307H100Z"></path>
+<path d="M100,250H400V207H100Z"></path>
+<path d="M0,150H400V107H0Z"></path>
+<path d="M100,50H500V7H100Z"></path>
+</g>
+<g style="fill:#1a1366;stroke:#1a1366;">
+<rect height="43" width="400" x="100" y="7">
+<animate attributename="width" dur="5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="5s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<rect height="43" width="400" x="0" y="107">
+<animate attributename="width" dur="3.5s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="3.5s" repeatcount="indefinite" values="0;0;400"></animate>
+</rect>
+<rect height="43" width="300" x="100" y="207">
+<animate attributename="width" dur="3s" repeatcount="indefinite" values="0;300;0"></animate>
+<animate attributename="x" dur="3s" repeatcount="indefinite" values="100;100;400"></animate>
+</rect>
+<rect height="43" width="400" x="100" y="307">
+<animate attributename="width" dur="4s" repeatcount="indefinite" values="0;400;0"></animate>
+<animate attributename="x" dur="4s" repeatcount="indefinite" values="100;100;500"></animate>
+</rect>
+<g rx="5" style="fill:transparent;stroke-width:8; stroke-linejoin:round">
+<g transform="translate(45 50) rotate(-45)">
+<circle cx="0" cy="0" r="33"></circle>
+<rect height="30" width="16" x="-8" y="32"></rect>
+</g>
+<g transform="translate(450 152)">
+<polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+<rect height="60" width="60" x="-15" y="-40"></rect>
+</g>
+<g transform="translate(50 352)">
+<polygon points="-35,-5 0,-40 35,-5"></polygon>
+<polygon points="-35,10 0,45 35,10"></polygon>
+</g>
+<g transform="translate(75 250)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+<g transform="translate(425 250) rotate(180)">
+<polyline points="-30,30 -60,0 -30,-30"></polyline>
+<polyline points="0,30 -30,0 0,-30"></polyline>
+</g>
+</g>
+</g>
+</svg>
+</a>
+        Loading ITables v2.8.1 from the internet...
+        (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)
+      </td>
 </tr>
 </tbody>
 </table>
-<p>90 rows × 3 columns</p>
-</div>
+<link href="https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.css" rel="stylesheet"/>
+<script type="module">
+    import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.5.5/dt_bundle.js';
+
+    document.querySelectorAll("#itables_294993af_32db_4527_8979_e1d6f03e067a:not(.dataTable)").forEach(table => {
+        if (!(table instanceof HTMLTableElement))
+            return;
+
+        let dt_args = {
+          "classes": ["display", "nowrap", "compact"],
+          "columnDefs": [{"render": "function (data, type, row, meta) { return type === 'sort' || type === 'type' ? data[1] : data[0]; }", "targets": [0, 1]}],
+          "data_json": "[[[\"10.0\", 10.0], [\"7.825116\", 7.82511626893606], \"EUR_2024/kg_H2\"], [[\"11.0\", 11.0], [\"7.353620\", 7.353619824121245], \"EUR_2024/kg_H2\"], [[\"12.0\", 12.0], [\"6.960706\", 6.960706120108898], \"EUR_2024/kg_H2\"], [[\"13.0\", 13.0], [\"6.628241\", 6.628240678252298], \"EUR_2024/kg_H2\"], [[\"14.0\", 14.0], [\"6.343270\", 6.343270299518067], \"EUR_2024/kg_H2\"], [[\"15.0\", 15.0], [\"6.096296\", 6.096295971281735], \"EUR_2024/kg_H2\"], [[\"16.0\", 16.0], [\"5.880193\", 5.880193434074944], \"EUR_2024/kg_H2\"], [[\"17.0\", 17.0], [\"5.689515\", 5.689514724774836], \"EUR_2024/kg_H2\"], [[\"18.0\", 18.0], [\"5.520023\", 5.520022538730293], \"EUR_2024/kg_H2\"], [[\"19.0\", 19.0], [\"5.368372\", 5.368371635427283], \"EUR_2024/kg_H2\"], [[\"20.0\", 20.0], [\"5.231886\", 5.231885822454572], \"EUR_2024/kg_H2\"], [[\"21.0\", 21.0], [\"5.108399\", 5.108398658336406], \"EUR_2024/kg_H2\"], [[\"22.0\", 22.0], [\"4.996138\", 4.996137600047164], \"EUR_2024/kg_H2\"], [[\"23.0\", 23.0], [\"4.893638\", 4.893638372913508], \"EUR_2024/kg_H2\"], [[\"24.0\", 24.0], [\"4.799681\", 4.799680748040991], \"EUR_2024/kg_H2\"], [[\"25.0\", 25.0], [\"4.713240\", 4.713239733158275], \"EUR_2024/kg_H2\"], [[\"26.0\", 26.0], [\"4.633448\", 4.633448027112691], \"EUR_2024/kg_H2\"], [[\"27.0\", 27.0], [\"4.559567\", 4.559566817811224], \"EUR_2024/kg_H2\"], [[\"28.0\", 28.0], [\"4.490963\", 4.490962837745576], \"EUR_2024/kg_H2\"], [[\"29.0\", 29.0], [\"4.427090\", 4.427090166649973], \"EUR_2024/kg_H2\"], [[\"30.0\", 30.0], [\"4.367476\", 4.36747567362741], \"EUR_2024/kg_H2\"], [[\"31.0\", 31.0], [\"4.311707\", 4.311707276928883], \"EUR_2024/kg_H2\"], [[\"32.0\", 32.0], [\"4.259424\", 4.259424405024014], \"EUR_2024/kg_H2\"], [[\"33.0\", 33.0], [\"4.210310\", 4.2103101920224715], \"EUR_2024/kg_H2\"], [[\"34.0\", 34.0], [\"4.164085\", 4.16408505037396], \"EUR_2024/kg_H2\"], [[\"35.0\", 35.0], [\"4.120501\", 4.1205013453910775], \"EUR_2024/kg_H2\"], [[\"36.0\", 36.0], [\"4.079339\", 4.0793389573516885], \"EUR_2024/kg_H2\"], [[\"37.0\", 37.0], [\"4.040402\", 4.040401563260375], \"EUR_2024/kg_H2\"], [[\"38.0\", 38.0], [\"4.003514\", 4.003513505700183], \"EUR_2024/kg_H2\"], [[\"39.0\", 39.0], [\"3.968517\", 3.9685171433994877], \"EUR_2024/kg_H2\"], [[\"40.0\", 40.0], [\"3.935271\", 3.9352705992138275], \"EUR_2024/kg_H2\"], [[\"41.0\", 41.0], [\"3.903646\", 3.903645837671371], \"EUR_2024/kg_H2\"], [[\"42.0\", 42.0], [\"3.873527\", 3.873527017154745], \"EUR_2024/kg_H2\"], [[\"43.0\", 43.0], [\"3.844809\", 3.8448090720109853], \"EUR_2024/kg_H2\"], [[\"44.0\", 44.0], [\"3.817396\", 3.817396488010124], \"EUR_2024/kg_H2\"], [[\"45.0\", 45.0], [\"3.791202\", 3.791202241075968], \"EUR_2024/kg_H2\"], [[\"46.0\", 46.0], [\"3.766147\", 3.766146874443296], \"EUR_2024/kg_H2\"], [[\"47.0\", 47.0], [\"3.742158\", 3.742157693624781], \"EUR_2024/kg_H2\"], [[\"48.0\", 48.0], [\"3.719168\", 3.719168062007037], \"EUR_2024/kg_H2\"], [[\"49.0\", 49.0], [\"3.697117\", 3.697116782700222], \"EUR_2024/kg_H2\"], [[\"50.0\", 50.0], [\"3.675948\", 3.675947554565679], \"EUR_2024/kg_H2\"], [[\"51.0\", 51.0], [\"3.655608\", 3.6556084922403342], \"EUR_2024/kg_H2\"], [[\"52.0\", 52.0], [\"3.636052\", 3.636051701542887], \"EUR_2024/kg_H2\"], [[\"53.0\", 53.0], [\"3.617233\", 3.6172329029472303], \"EUR_2024/kg_H2\"], [[\"54.0\", 54.0], [\"3.599111\", 3.5991110968921536], \"EUR_2024/kg_H2\"], [[\"55.0\", 55.0], [\"3.581648\", 3.5816482656027158], \"EUR_2024/kg_H2\"], [[\"56.0\", 56.0], [\"3.564809\", 3.5648091068593293], \"EUR_2024/kg_H2\"], [[\"57.0\", 57.0], [\"3.548561\", 3.54856079579115], \"EUR_2024/kg_H2\"], [[\"58.0\", 58.0], [\"3.532873\", 3.532872771311528], \"EUR_2024/kg_H2\"], [[\"59.0\", 59.0], [\"3.517717\", 3.5177165442718934], \"EUR_2024/kg_H2\"], [[\"60.0\", 60.0], [\"3.503066\", 3.5030655248002467], \"EUR_2024/kg_H2\"], [[\"61.0\", 61.0], [\"3.488895\", 3.488894866622752], \"EUR_2024/kg_H2\"], [[\"62.0\", 62.0], [\"3.475181\", 3.475181326450983], \"EUR_2024/kg_H2\"], [[\"63.0\", 63.0], [\"3.461903\", 3.4619031367608577], \"EUR_2024/kg_H2\"], [[\"64.0\", 64.0], [\"3.449040\", 3.449039890498549], \"EUR_2024/kg_H2\"], [[\"65.0\", 65.0], [\"3.436572\", 3.4365724364289263], \"EUR_2024/kg_H2\"], [[\"66.0\", 66.0], [\"3.424483\", 3.424482783997777], \"EUR_2024/kg_H2\"], [[\"67.0\", 67.0], [\"3.412754\", 3.4127540167138264], \"EUR_2024/kg_H2\"], [[\"68.0\", 68.0], [\"3.401370\", 3.4013702131735215], \"EUR_2024/kg_H2\"], [[\"69.0\", 69.0], [\"3.390316\", 3.3903163749532252], \"EUR_2024/kg_H2\"], [[\"70.0\", 70.0], [\"3.379578\", 3.3795783606820806], \"EUR_2024/kg_H2\"], [[\"71.0\", 71.0], [\"3.369143\", 3.369142825686179], \"EUR_2024/kg_H2\"], [[\"72.0\", 72.0], [\"3.358997\", 3.358997166662386], \"EUR_2024/kg_H2\"], [[\"73.0\", 73.0], [\"3.349129\", 3.349129470899519], \"EUR_2024/kg_H2\"], [[\"74.0\", 74.0], [\"3.339528\", 3.339528469616729], \"EUR_2024/kg_H2\"], [[\"75.0\", 75.0], [\"3.330183\", 3.330183495034814], \"EUR_2024/kg_H2\"], [[\"76.0\", 76.0], [\"3.321084\", 3.3210844408366333], \"EUR_2024/kg_H2\"], [[\"77.0\", 77.0], [\"3.312222\", 3.312221725708535], \"EUR_2024/kg_H2\"], [[\"78.0\", 78.0], [\"3.303586\", 3.303586259686286], \"EUR_2024/kg_H2\"], [[\"79.0\", 79.0], [\"3.295169\", 3.2951694130570046], \"EUR_2024/kg_H2\"], [[\"80.0\", 80.0], [\"3.286963\", 3.286962987593456], \"EUR_2024/kg_H2\"], [[\"81.0\", 81.0], [\"3.278959\", 3.27895918991913], \"EUR_2024/kg_H2\"], [[\"82.0\", 82.0], [\"3.271151\", 3.271150606822227], \"EUR_2024/kg_H2\"], [[\"83.0\", 83.0], [\"3.263530\", 3.2635301823541654], \"EUR_2024/kg_H2\"], [[\"84.0\", 84.0], [\"3.256091\", 3.2560911965639145], \"EUR_2024/kg_H2\"], [[\"85.0\", 85.0], [\"3.248827\", 3.248827245733434], \"EUR_2024/kg_H2\"], [[\"86.0\", 86.0], [\"3.241732\", 3.2417322239920345], \"EUR_2024/kg_H2\"], [[\"87.0\", 87.0], [\"3.234800\", 3.2348003061987134], \"EUR_2024/kg_H2\"], [[\"88.0\", 88.0], [\"3.228026\", 3.228025931991604], \"EUR_2024/kg_H2\"], [[\"89.0\", 89.0], [\"3.221404\", 3.221403790912744], \"EUR_2024/kg_H2\"], [[\"90.0\", 90.0], [\"3.214929\", 3.2149288085245256], \"EUR_2024/kg_H2\"], [[\"91.0\", 91.0], [\"3.208596\", 3.2085961334415427], \"EUR_2024/kg_H2\"], [[\"92.0\", 92.0], [\"3.202401\", 3.20240112520819], \"EUR_2024/kg_H2\"], [[\"93.0\", 93.0], [\"3.196339\", 3.19633934295835], \"EUR_2024/kg_H2\"], [[\"94.0\", 94.0], [\"3.190407\", 3.190406534798932], \"EUR_2024/kg_H2\"], [[\"95.0\", 95.0], [\"3.184599\", 3.1845986278639233], \"EUR_2024/kg_H2\"], [[\"96.0\", 96.0], [\"3.178912\", 3.1789117189900606], \"EUR_2024/kg_H2\"], [[\"97.0\", 97.0], [\"3.173342\", 3.173342065969267], \"EUR_2024/kg_H2\"], [[\"98.0\", 98.0], [\"3.167886\", 3.1678860793366526], \"EUR_2024/kg_H2\"], [[\"99.0\", 99.0], [\"3.162540\", 3.1625403146562125], \"EUR_2024/kg_H2\"]]",
+          "keys_to_be_evaluated": [["columnDefs", 0, "render"]],
+          "layout": {"bottomEnd": "paging", "bottomStart": "info", "topEnd": "search", "topStart": "pageLength"},
+          "order": [],
+          "style": {"caption-side": "bottom", "margin": "auto", "table-layout": "auto", "width": "auto"},
+          "table_html": "<table><thead>\n    <tr style=\"text-align: right;\">\n      \n      <th>ocf</th>\n      <th>value</th>\n      <th>unit</th>\n    </tr>\n  </thead></table>",
+          "text_in_header_can_be_selected": true
+        };
+        new ITable(table, dt_args);
+    });
+</script>
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div style="height:525px; width:100%;"> <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script> <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+<script charset="utf-8" crossorigin="anonymous" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" src="https://cdn.plot.ly/plotly-3.6.0.min.js"></script> <div class="plotly-graph-div" id="9cb94560-6ee2-483a-8a71-f314e1fa93ae" style="height:100%; width:100%;"></div> <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9cb94560-6ee2-483a-8a71-f314e1fa93ae")) {                    Plotly.newPlot(                        "9cb94560-6ee2-483a-8a71-f314e1fa93ae",                        [{"hovertemplate":"ocf=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","line":{"color":"#1F77B4","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"","orientation":"v","showlegend":false,"x":{"dtype":"f8","bdata":"AAAAAAAAJEAAAAAAAAAmQAAAAAAAAChAAAAAAAAAKkAAAAAAAAAsQAAAAAAAAC5AAAAAAAAAMEAAAAAAAAAxQAAAAAAAADJAAAAAAAAAM0AAAAAAAAA0QAAAAAAAADVAAAAAAAAANkAAAAAAAAA3QAAAAAAAADhAAAAAAAAAOUAAAAAAAAA6QAAAAAAAADtAAAAAAAAAPEAAAAAAAAA9QAAAAAAAAD5AAAAAAAAAP0AAAAAAAABAQAAAAAAAgEBAAAAAAAAAQUAAAAAAAIBBQAAAAAAAAEJAAAAAAACAQkAAAAAAAABDQAAAAAAAgENAAAAAAAAAREAAAAAAAIBEQAAAAAAAAEVAAAAAAACARUAAAAAAAABGQAAAAAAAgEZAAAAAAAAAR0AAAAAAAIBHQAAAAAAAAEhAAAAAAACASEAAAAAAAABJQAAAAAAAgElAAAAAAAAASkAAAAAAAIBKQAAAAAAAAEtAAAAAAACAS0AAAAAAAABMQAAAAAAAgExAAAAAAAAATUAAAAAAAIBNQAAAAAAAAE5AAAAAAACATkAAAAAAAABPQAAAAAAAgE9AAAAAAAAAUEAAAAAAAEBQQAAAAAAAgFBAAAAAAADAUEAAAAAAAABRQAAAAAAAQFFAAAAAAACAUUAAAAAAAMBRQAAAAAAAAFJAAAAAAABAUkAAAAAAAIBSQAAAAAAAwFJAAAAAAAAAU0AAAAAAAEBTQAAAAAAAgFNAAAAAAADAU0AAAAAAAABUQAAAAAAAQFRAAAAAAACAVEAAAAAAAMBUQAAAAAAAAFVAAAAAAABAVUAAAAAAAIBVQAAAAAAAwFVAAAAAAAAAVkAAAAAAAEBWQAAAAAAAgFZAAAAAAADAVkAAAAAAAABXQAAAAAAAQFdAAAAAAACAV0AAAAAAAMBXQAAAAAAAAFhAAAAAAABAWEAAAAAAAIBYQAAAAAAAwFhA"},"xaxis":"x","y":{"dtype":"f8","bdata":"Y+l5R+tMH0CnRa9QG2odQDO9W1jD1xtAIXE8hlGDGkAPedg\u002fgl8ZQAGRPWmbYhhA9QV2bVGFF0DNEuQlEMIWQDYe1MmAFBZAo7z7aTZ5FUDQZB96c+0UQMnw0Q4AbxRA8RK6fgv8E0DpdAjwFZMTQLhOkILfMhNAgH1AhFvaEkCvqICZpogSQDm0eRX\u002fPBJApqxO9r72EUC90egfV7URQJ84AYtLeBFAzVZBMTA\u002fEUAZcx2NpgkRQAsCE45b1xBAhXlU6QWoEECRUGa0ZHsQQDl\u002fTDs+URBAcaQDB18pEEBvTmALmQMQQA8hhOqFvw9AC0XkJm97D0BzuD+rqjoPQAXRlrv7\u002fA5A2DU9QivCDkAt834rB4oOQKeLL9dhVA5AJVXNnBEhDkDrvnRf8O8NQPMuVS\u002fbwA1Ag4W59rGTDUC7XQUxV2gNQIM3SaqvPg1A6ohFRqIWDUBSY+HNF\u002fAMQHSUPsL6ygxAb0+0NDenDEDhjBOjuoQMQGdTrtdzYwxA+bGtzFJDDECk91GSSCQMQNsYxjdHBgxAs506tkHpC0AJNwbeK80LQCt2kkX6sQtAVVPiOaKXC0DTYIawGX4LQEbi1zpXZQtA0KBY+lFNC0DAWRmWATYLQJYjDDFeHwtAzTArYWAJC0BYAF8nAfQKQHVfEeg53wpAbqpcZATLCkCshMizWrcKQPrThj43pApAqy4luJSRCkCWJqgabn8KQMTwBqK+bQpA89\u002f+x4FcCkDCAjdAs0sKQHX4rPROOwpAdbxkAlErCkCtwlW2tRsKQL9IkIp5DApAGDuWI5n9CUAoe+NNEe8JQM62ofve4AlA01mEQv\u002fSCUD9cclZb8UJQA+mXJgsuAlAuaAZczSrCUDPiit7hJ4JQNlkh1wakglAsT9\u002f3POFCUAHf2zYDnoJQLZ3b0RpbglAY99CKgFjCUD9oiGo1FcJQAHXve\u002fhTAlA"},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"rgb(36,36,36)"},"error_y":{"color":"rgb(36,36,36)"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"rgb(36,36,36)","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"rgb(36,36,36)"},"baxis":{"endlinecolor":"rgb(36,36,36)","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"rgb(36,36,36)"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"histogram2d"}],"histogram":[{"marker":{"line":{"color":"white","width":0.6}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"},"colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"rgb(237,237,237)"},"line":{"color":"white"}},"header":{"fill":{"color":"rgb(217,217,217)"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":1,"tickcolor":"rgb(36,36,36)","ticks":"outside"}},"colorscale":{"diverging":[[0.0,"rgb(103,0,31)"],[0.1,"rgb(178,24,43)"],[0.2,"rgb(214,96,77)"],[0.3,"rgb(244,165,130)"],[0.4,"rgb(253,219,199)"],[0.5,"rgb(247,247,247)"],[0.6,"rgb(209,229,240)"],[0.7,"rgb(146,197,222)"],[0.8,"rgb(67,147,195)"],[0.9,"rgb(33,102,172)"],[1.0,"rgb(5,48,97)"]],"sequential":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],"sequentialminus":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]]},"colorway":["#1F77B4","#FF7F0E","#2CA02C","#D62728","#9467BD","#8C564B","#E377C2","#7F7F7F","#BCBD22","#17BECF"],"dragmode":false,"font":{"color":"rgb(36,36,36)"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","polar":{"angularaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"bgcolor":"white","radialaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"yaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"zaxis":{"backgroundcolor":"white","gridcolor":"rgb(232,232,232)","gridwidth":2,"linecolor":"rgb(36,36,36)","showbackground":true,"showgrid":false,"showline":true,"ticks":"outside","zeroline":false,"zerolinecolor":"rgb(36,36,36)"}},"shapedefaults":{"fillcolor":"black","line":{"width":0},"opacity":0.3},"ternary":{"aaxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"baxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"},"bgcolor":"white","caxis":{"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside"}},"title":{"x":0.05},"xaxis":{"automargin":true,"fixedrange":true,"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside","title":{"standoff":15},"zeroline":false,"zerolinecolor":"rgb(36,36,36)"},"yaxis":{"automargin":true,"fixedrange":true,"gridcolor":"rgb(232,232,232)","linecolor":"rgb(36,36,36)","showgrid":false,"showline":true,"ticks":"outside","title":{"standoff":15},"zeroline":false,"zerolinecolor":"rgb(36,36,36)"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Operational Capacity Factor  (%)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"LCOH  ( EUR_2024\u002fkg_H2 )"}},"legend":{"tracegroupgap":0},"margin":{"t":60}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('9cb94560-6ee2-483a-8a71-f314e1fa93ae');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script> </div>
+</div>
 </div>
 </div>
 </div>
