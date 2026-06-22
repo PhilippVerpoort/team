@@ -12,6 +12,7 @@ hide:
 
 # TEAM: Techno-economic assessment and manipulation framework
 
+[![DOI](https://zenodo.org/badge/1019168442.svg)](https://doi.org/10.5281/zenodo.20802604)
 [![Licence: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/PhilippVerpoort/team/blob/main/LICENSE.md)
 [![Documentation Status](https://img.shields.io/badge/docs-online-blue)](https://philippverpoort.github.io/team/latest/)
 [![CI](https://github.com/PhilippVerpoort/team/actions/workflows/ci.yml/badge.svg)](https://github.com/PhilippVerpoort/team/actions/workflows/ci.yml)
