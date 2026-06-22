@@ -68,8 +68,8 @@ plugins:
 - awesome-nav
 - mkdocs-jupyter:
     execute: false
-    show_input: false
-    no_input: true
+    show_input: true
+    no_input: false
     include: ["*.ipynb"]
     include_source: true
 - markdown-exec

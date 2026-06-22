@@ -8,9 +8,9 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.0
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python (docs)
 #     language: python
-#     name: python3
+#     name: docs
 # ---
 
 # %% [markdown]

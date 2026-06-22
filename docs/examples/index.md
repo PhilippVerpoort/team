@@ -9,6 +9,6 @@ Here is a list of examples of techno-economic assessments made with TEAM. The ex
 ```python exec="true" showcode="false"
 from pathlib import Path
 
-for file in (Path(".") / "docs" / "example").glob("*.ipynb"):
+for file in (Path(".") / "docs" / "examples").glob("*.ipynb"):
     print(f"* [{file.stem}]({file.stem})")
 ```

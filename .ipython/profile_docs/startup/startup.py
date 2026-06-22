@@ -22,6 +22,7 @@ init_notebook_mode(connected=True)
 
 
 # Silence POSTED warnings when executing for mkdocs.
+IS_DOCS: bool = os.getenv("BUILD_POSTED_DOCS") == "1"
 if IS_DOCS:
     from warnings import filterwarnings
 
