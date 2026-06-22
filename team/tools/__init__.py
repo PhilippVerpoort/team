@@ -1,4 +1,4 @@
-"""This module contains predefined calculation routines."""
+"""Defining common calculation routines."""
 
 from ._emi import calc_emissions, calc_GHGI, calc_GHGI_pc
 from ._fscp import calc_FSCP

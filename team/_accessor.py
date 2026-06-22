@@ -374,11 +374,17 @@ class TEAMAccessor:
         unit_col: str = "unit",
         **kwargs,
     ) -> DataFrameGroupBy:
-        """Group by field columns (region, period, other...). Fields with
-        rows that contain nan entries will be 'exploded' first.
+        """Group by fields columns.
+
+        Group by field columns (region, period, other...). Fields with rows
+        that contain nan entries will be 'exploded' first. Fields can be
+        passed explicitly or inferred from the column names of the dataframe
+        that are not the variable, unit, or value columns.
 
         Parameters
         ----------
+        fields : str | list[str], optional
+            Single field or list of fields to group by.
         var_cols : str or list[str] or tuple[str], optional
             Name of column containing the variables as strings. Default is
             `variable`. Multiple columns can be defined for advanced pivotting
@@ -502,6 +508,11 @@ class TEAMAccessor:
             before processing output from `func`.
         only_new : bool, optional
             Whether to only keep new variables. Default is False.
+        fill_missing : bool, optional
+            Whether to impute missing variables with NaN in variable-unit
+            groups.
+        using : pd.DataFrame or list[pd.DataFrame], optional
+            Data/assumptions to use but not append to the output dataframe.
         dropna: bool, optional
             Whether to drop NaN entries resulting from the function call.
             Default is True.
@@ -557,7 +568,7 @@ class TEAMAccessor:
         value_col: str = "value",
         unit_col: str = "unit",
     ):
-        """Perform manipulations by applying multiple functions to the dataframe.
+        """Perform multiple manipulations to a dataframe at once.
 
         Parameters
         ----------
@@ -567,6 +578,11 @@ class TEAMAccessor:
             `dropna`, `args`, and `kwargs` (same as `.team.perform()`).
         only_new : bool, optional
             Whether to only keep new variables. Default is False.
+        fill_missing : bool, optional
+            Whether to impute missing variables with NaN in variable-unit
+            groups.
+        using : pd.DataFrame or list[pd.DataFrame], optional
+            Data/assumptions to use but not append to the output dataframe.
         dropna: bool, optional
             Whether to drop NaN entries resulting from the function call.
             Default is True.
@@ -834,7 +850,9 @@ class TEAMAccessor:
         unit_col: str = "unit",
         **kw_assignments: KeywordAssignment,
     ):
-        """This accessor method allows calculating new variables without defining
+        """Calculate variables from expressions.
+
+        This accessor method allows calculating new variables without defining
         a complete function to be used with `.perform()`. New variables can be
         calculated through expression assignments or keyword assignments.
         Expression assignments are of form "`a` = `b` + `c`" and are based on
@@ -844,9 +862,15 @@ class TEAMAccessor:
 
         Parameters
         ----------
-        expr_assignments : str
+        expr_assignments : ExprAssignment
+            Expression(s) for assigning variable. Expressions can be floats
+            or ints for direct assignment, strings for evaluation on the
+            dataframe, or callable to call on the dataframe.
         only_new : bool
             Whether only new values should be kept. Default is False.
+        fill_missing : bool, optional
+            Whether to impute missing variables with NaN in variable-unit
+            groups.
         var_cols : str | list[str] | tuple[str]
             The name(s) of the varaible column(s) to use. Default is
             `variable`.
@@ -880,9 +904,10 @@ class TEAMAccessor:
         var_new: str | bool = True,
         keep_unmatched: bool = False,
     ) -> pd.DataFrame:
-        """Split variable components separated by pipe characters into
-        separate columns. The pattern must either be provided as
-        `cmd` or as `regex`.
+        """Split variable column by pipe characters.
+
+        Split variable components separated by pipe characters into separate
+        columns. The pattern must either be provided as `cmd` or as `regex`.
 
         Parameters
         ----------
@@ -1120,12 +1145,37 @@ class TEAMAccessor:
     def unit_to(
         self,
         other: str | Unit | dict[str, str | Unit],
-        *contexts,
+        *contexts: str | pint.Context,
         var_cols: str | list[str] | tuple[str] = "variable",
         value_col: str = "value",
         unit_col: str = "unit",
         **ctx_kwargs,
     ):
+        """Convert units in dataframe.
+
+        Parameters
+        ----------
+        other : str | team_units.Unit | dict[str, str | team_units.Unit]
+            The unit to convert to. This is either one unit for all rows
+            or a dict that maps variables to units.
+        contexts : str | pint.Context
+            A pint unit context to assume for unit conversion.
+        var_cols : str | list[str] | tuple[str]
+            The name(s) of the varaible column(s) to use. Default is
+            `variable`.
+        value_col : str
+            The name of the value column to use. Default is `value`.
+        unit_col : str
+            The name of the unit column to use. Default is `unit`.
+        ctx_kwargs : float
+            Constants or parameters to assume as part of the unit context.
+
+        Returns
+        -------
+            pd.DataFrame
+                The dataframe with updated units.
+
+        """
         return self.__unit_convert(
             "to",
             other=other,
@@ -1138,13 +1188,39 @@ class TEAMAccessor:
 
     def unit_to_preferred(
         self,
-        other: str | Unit | dict[str, str | Unit],
+        other: list[Unit] | dict[str, list[Unit]],
         *contexts,
         var_cols: str | list[str] | tuple[str] = "variable",
         value_col: str = "value",
         unit_col: str = "unit",
         **ctx_kwargs,
     ):
+        """Convert units in dataframe.
+
+        Parameters
+        ----------
+        other : list[Unit] | dict[str, list[Unit]]
+            The preferred units to use for conversion. This is either one
+            list of units for all rows or a dict that maps variables to
+            lists of units.
+        contexts : str | pint.Context
+            A pint unit context to assume for unit conversion.
+        var_cols : str | list[str] | tuple[str]
+            The name(s) of the varaible column(s) to use. Default is
+            `variable`.
+        value_col : str
+            The name of the value column to use. Default is `value`.
+        unit_col : str
+            The name of the unit column to use. Default is `unit`.
+        ctx_kwargs
+            Constants or parameters to assume as part of the unit context.
+
+        Returns
+        -------
+            pd.DataFrame
+                The dataframe with updated units.
+
+        """
         return self.__unit_convert(
             "to_preferred",
             other=other,
@@ -1158,27 +1234,17 @@ class TEAMAccessor:
     def __unit_convert(
         self,
         subfunc: str,
-        other: str | Unit | dict[str, str | Unit],
+        other: str
+        | Unit
+        | dict[str, str | Unit]
+        | list[Unit]
+        | dict[str, list[Unit]],
         contexts: str | pint.Context,
         var_cols: str | list[str] | tuple[str],
         value_col: str,
         unit_col: str,
-        ctx_kwargs: dict[str, str | pint.Context],
+        ctx_kwargs: dict[str, float],
     ):
-        """Convert units in dataframe.
-
-        Parameters
-        ----------
-        to : str | team_units.Unit | dict[str, str | team_units.Unit]
-            The unit to convert to. This is either one unit for all rows
-            or a dict that maps variables to units.
-
-        Returns
-        -------
-            pd.DataFrame
-                The dataframe with updated units.
-
-        """
         # Check if to_unit is a single unit or a dict of units
         if not isinstance(other, dict):
             conv_factors = {}

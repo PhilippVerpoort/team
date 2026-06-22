@@ -1,4 +1,4 @@
-"""TEAM: Techno-economic assessment and manipulation framework
+"""TEAM: Techno-economic assessment and manipulation framework.
 
 TEAM is a framework for performing techno-economic assessments in the context
 of energy and climate-mitigation studies.
